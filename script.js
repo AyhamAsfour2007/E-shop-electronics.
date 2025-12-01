@@ -362,11 +362,13 @@ function checkout() {
     let message = "Hello! I'd like to order the following items:\n\n";
 
     cart.forEach(item => {
-        message += `${item.name} - Quantity: ${item.quantity} - Price: $${item.price} each\n`;
+        // ⭐ التغيير هنا: استبدال $ بـ ₪ في سعر الوحدة
+        message += `${item.name} - Quantity: ${item.quantity} - Price: ₪${item.price} each\n`;
     });
 
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    message += `\nTotal: $${total.toFixed(2)}\n`;
+    // ⭐ التغيير هنا: استبدال $ بـ ₪ في المجموع الكلي
+    message += `\nTotal: ₪${total.toFixed(2)}\n`;
     message += `\nPayment method: Cash on delivery\n`;
 
     if (customerNotes) {
@@ -379,7 +381,8 @@ function checkout() {
     const encodedMessage = encodeURIComponent(message);
 
     // Open WhatsApp with the message
-    window.open(`https://wa.me/0598000890?text=${encodedMessage}`, '_blank');
+    // ملاحظة: يُفضل تغيير '1234567890' إلى رقم واتساب الصحيح (مثل 0598000890 من ملف index.html)
+    window.open(`https://wa.me/970598000890?text=${encodedMessage}`, '_blank');
 
     // Clear cart after checkout
     cart = [];
